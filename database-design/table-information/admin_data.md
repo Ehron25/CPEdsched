@@ -9,7 +9,7 @@ Stores information about system administrators who manage the room reservation a
 |------------|-----------|-------------|-------------|
 | **admin_id** | INT | PRIMARY KEY, AUTO_INCREMENT, NOT NULL | Unique identifier for each administrator |
 | **a_fname** | VARCHAR(100) | NOT NULL | Administrator's first name |
-| **a_mname** | VARCHAR(100) | NOT NULL | Administrator's middle name |
+| **a_mname** | VARCHAR(100) | NULL | Administrator's middle name |
 | **a_sname** | VARCHAR(100) | NOT NULL | Administrator's surname/last name |
 | **a_role** | VARCHAR(100) | NOT NULL | Administrator's role or position **(STILL UNDECIDED ABOUT THIS ONE!!!)** |
 | **webmail** | VARCHAR(255) | UNIQUE, NOT NULL | Administrator's institutional email address (used for login) |
