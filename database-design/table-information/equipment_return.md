@@ -120,8 +120,7 @@ Equipment available_quantity increases (if Good/Minimal)
 - All parts and accessories included
 - Fully functional and ready for immediate reuse
 - **Action**: Immediately add back to `available_quantity`
-- **Student**: No penalties or charges
-- **Examples**: Equipment looks and works like new
+
 
 #### **Minimal**
 - Minor cosmetic damage or wear
@@ -135,8 +134,6 @@ Equipment available_quantity increases (if Good/Minimal)
   - Slightly worn buttons or connectors
   - Normal wear from regular use
 - **Action**: Add back to `available_quantity`, document condition for tracking
-- **Student**: Usually no penalty, may get warning depending on policy
-- **Note**: Equipment remains in circulation but condition is documented
 
 #### **Defective**
 - Significant damage affecting functionality
@@ -151,8 +148,7 @@ Equipment available_quantity increases (if Good/Minimal)
   - Missing essential cables or accessories
   - Electrical issues or short circuits
 - **Action**: Do NOT add to `available_quantity` until repaired
-- **Student**: May be charged repair cost or partial/full replacement depending on damage
-- **Status**: Mark equipment for repair, send to maintenance
+
 
 #### **Lost**
 - Equipment not returned by student
@@ -161,9 +157,6 @@ Equipment available_quantity increases (if Good/Minimal)
 - **Action**: 
   - Reduce `total_quantity` in equipment table
   - Do NOT add to `available_quantity`
-  - Flag student account
-- **Student**: Charged full replacement cost
-- **Follow-up**: May affect student's ability to borrow in future
 
 ### **Design Notes:**
 
