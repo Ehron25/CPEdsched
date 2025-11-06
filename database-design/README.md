@@ -1,36 +1,50 @@
+Here is the updated `README.md` content.
+
+I've updated the **Folder Structure** to include the new `workflows` directory, added a new section explaining what the **Workflow Diagrams** are for, and corrected the path and version of the **MySQL Workbench file** to point to the latest version in the parent directory.
+
+```markdown
 # Database Design Documentation
 
-This folder contains the complete database design documentation for the system, including the MySQL Workbench model, physical schema, ER diagram, and detailed information about each database table.
+This folder contains the complete database design documentation for the `cpedsched` system, including the MySQL Workbench model, physical schema, ER diagrams, and detailed information about each database table.
 
 ## 📁 Folder Structure
 
 ```
+
 database-design/
-├── README.md                    # This file
-├── cpedsched.mwb                # MySQL Workbench model file
-└── table-information/
-    ├── admin_data.md            # Administrator table documentation
-    ├── college_data.md          # College table documentation
-    ├── credentials.md           # Credentials table documentation
-    ├── departments.md           # Departments table documentation
-    ├── equipment.md             # Equipment table documentation
-    ├── equipment_category.md    # Equipment category table documentation
-    ├── equipment_return.md      # Equipment return table documentation
-    ├── key_issuance.md          # Key issuance table documentation
-    ├── professor_information.md # Professor table documentation
-    ├── program_data.md          # Program table documentation
-    ├── reservation.md           # Reservation table documentation
-    ├── reservation_equipment.md # Reservation equipment table documentation
-    ├── room_completion.md       # Room completion table documentation
-    ├── room_data.md             # Room data table documentation
-    ├── room_keys.md             # Room keys table documentation
-    ├── sections.md              # Sections table documentation
-    └── student_data.md          # Student table documentation
+├── README.md                  \# This file
+├── table-information/
+│   ├── admin\_data.md
+│   ├── college\_data.md
+│   ├── credentials.md
+│   ├── departments.md
+│   ├── equipment.md
+│   ├── equipment\_category.md
+│   ├── equipment\_return.md
+│   ├── key\_issuance.md
+│   ├── professor\_information.md
+│   ├── program\_data.md
+│   ├── reservation.md
+│   ├── reservation\_equipment.md
+│   ├── room\_completion.md
+│   ├── room\_data.md
+│   ├── room\_keys.md
+│   ├── sections.md
+│   └── student\_data.md
+└── workflows/
+    ├── Completion-workflow.png
+    ├── equipment-workflow.png
+    ├── key-issuance-workflow.png
+    ├── README.md
+    ├── reservation-workflow.png
+    ├── student-data-workflow.png
+    └── whole-erd.png
+
 ```
 
 ## 📊 Database Model File
 
-The `cpedsched.mwb` file is a MySQL Workbench model that contains:
+The `../cpedsched_1.3.mwb` file (located in the parent directory) is a MySQL Workbench model that contains:
 
 - **Physical Schema** - The complete database schema with all tables, columns, and data types
 - **ER Diagram** - Visual representation showing table relationships, primary keys, foreign keys, and cardinality
@@ -39,9 +53,22 @@ The `cpedsched.mwb` file is a MySQL Workbench model that contains:
 **To view the model:**
 1. Open MySQL Workbench
 2. Go to File → Open Model
-3. Select `cpedsched.mwb`
+3. Select `../cpedsched_1.3.mwb` (or the latest `.mwb` file in the root)
 4. Navigate to the ER Diagram tab to see the visual representation
 5. Use the Physical Schemas panel to explore table structures
+
+## 🔄 Workflow Diagrams
+
+The `workflows/` folder contains several focused ERD diagrams that visualize specific business processes. These diagrams are intended to be easier to understand for a specific module than the full, complex ERD.
+
+- **whole-erd.png**: The complete database schema.
+- **student-data-workflow.png**: Shows student identity and academic relationships.
+- **reservation-workflow.png**: Shows the core room reservation process.
+- **equipment-workflow.png**: Details how equipment is linked to reservations.
+- **key-issuance-workflow.png**: Illustrates the key borrowing and return process.
+- **Completion-workflow.png**: Shows the final "check-out" process for closing a reservation.
+
+See the `workflows/README.md` for a detailed breakdown of each diagram.
 
 ## 📖 Detailed Table Information
 
@@ -96,7 +123,8 @@ The database implements a normalized relational structure with:
 
 ---
 
-**Branch:** database-design  
-**Database Name:** cpedsched  
-**Last Updated:** November 2025  
+**Branch:** database-design  
+**Database Name:** cpedsched  
+**Last Updated:** November 2025  
 **Maintained by:** Development Team
+```
