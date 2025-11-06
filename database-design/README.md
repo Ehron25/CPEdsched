@@ -1,8 +1,3 @@
-Here is the updated `README.md` content.
-
-I've updated the **Folder Structure** to include the new `workflows` directory, added a new section explaining what the **Workflow Diagrams** are for, and corrected the path and version of the **MySQL Workbench file** to point to the latest version in the parent directory.
-
-```markdown
 # Database Design Documentation
 
 This folder contains the complete database design documentation for the `cpedsched` system, including the MySQL Workbench model, physical schema, ER diagrams, and detailed information about each database table.
@@ -10,27 +5,26 @@ This folder contains the complete database design documentation for the `cpedsch
 ## 📁 Folder Structure
 
 ```
-
 database-design/
-├── README.md                  \# This file
+├── README.md                  # This file
 ├── table-information/
-│   ├── admin\_data.md
-│   ├── college\_data.md
+│   ├── admin_data.md
+│   ├── college_data.md
 │   ├── credentials.md
 │   ├── departments.md
 │   ├── equipment.md
-│   ├── equipment\_category.md
-│   ├── equipment\_return.md
-│   ├── key\_issuance.md
-│   ├── professor\_information.md
-│   ├── program\_data.md
+│   ├── equipment_category.md
+│   ├── equipment_return.md
+│   ├── key_issuance.md
+│   ├── professor_information.md
+│   ├── program_data.md
 │   ├── reservation.md
-│   ├── reservation\_equipment.md
-│   ├── room\_completion.md
-│   ├── room\_data.md
-│   ├── room\_keys.md
+│   ├── reservation_equipment.md
+│   ├── room_completion.md
+│   ├── room_data.md
+│   ├── room_keys.md
 │   ├── sections.md
-│   └── student\_data.md
+│   └── student_data.md
 └── workflows/
     ├── Completion-workflow.png
     ├── equipment-workflow.png
@@ -39,12 +33,11 @@ database-design/
     ├── reservation-workflow.png
     ├── student-data-workflow.png
     └── whole-erd.png
-
 ```
 
 ## 📊 Database Model File
 
-The `../cpedsched_1.3.mwb` file (located in the parent directory) is a MySQL Workbench model that contains:
+The `cpedsched_1.3.mwb` file is a MySQL Workbench model that contains:
 
 - **Physical Schema** - The complete database schema with all tables, columns, and data types
 - **ER Diagram** - Visual representation showing table relationships, primary keys, foreign keys, and cardinality
@@ -53,7 +46,7 @@ The `../cpedsched_1.3.mwb` file (located in the parent directory) is a MySQL Wor
 **To view the model:**
 1. Open MySQL Workbench
 2. Go to File → Open Model
-3. Select `../cpedsched_1.3.mwb` (or the latest `.mwb` file in the root)
+3. Select `cpedsched_1.3.mwb` (the latest version in the repository root)
 4. Navigate to the ER Diagram tab to see the visual representation
 5. Use the Physical Schemas panel to explore table structures
 
@@ -123,8 +116,7 @@ The database implements a normalized relational structure with:
 
 ---
 
-**Branch:** database-design  
-**Database Name:** cpedsched  
-**Last Updated:** November 2025  
+**Branch:** database-design  
+**Database Name:** cpedsched  
+**Last Updated:** November 2025  
 **Maintained by:** Development Team
-```
