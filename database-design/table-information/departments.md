@@ -26,7 +26,7 @@ Stores information about academic departments within each college. This table se
 - Foreign key ensures valid college references
 - Multiple departments can reference the same college
 
-### **Business Rules:**
+### **Table Notes:**
 
 1. **College Association:** Every department must be assigned to exactly one college
 2. **Unique Department Names:** Department names must be unique across ALL colleges (no duplicate department names anywhere in the system)

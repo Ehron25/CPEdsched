@@ -74,7 +74,7 @@ equipment (Many)
 reservation_equipment (Many)
 ```
 
-### **Business Rules:**
+### **Table Notes:**
 
 1. **Category Assignment:**
    - Every equipment item must belong to exactly one category

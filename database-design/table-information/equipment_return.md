@@ -38,7 +38,7 @@ Tracks the return of borrowed equipment from reservations. This table records wh
 - Tracks equipment condition history
 - Helps identify frequently damaged equipment
 
-### **Business Rules:**
+### **Table Notes:**
 
 1. **Return Verification Required:**
    - All returns must be verified by authorized admin/staff

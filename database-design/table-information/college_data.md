@@ -22,7 +22,7 @@ Stores information about the different colleges within the university. This tabl
 - College names are required (cannot be NULL)
 - Supports up to 200 characters for long college names
 
-### **Business Rules:**
+### **Table Notes:**
 
 1. **Unique Colleges:** Each college should have a distinct entry
 2. **Name Format:** Use full official college names (e.g., "College of Engineering and Technology")
@@ -63,33 +63,6 @@ college_name: College of Computer and Information Science
 
 college_id: 5
 college_name: Institute of Technology
-```
-
-### **Usage Examples:**
-
-**Finding all departments in a college:**
-```sql
-SELECT d.department_name 
-FROM departments d
-WHERE d.college_id = 1;
-```
-
-**Finding all programs under a college:**
-```sql
-SELECT p.program_name 
-FROM program_data p
-JOIN departments d ON p.department_id = d.department_id
-WHERE d.college_id = 1;
-```
-
-**Counting students per college:**
-```sql
-SELECT c.college_name, COUNT(s.student_id) as total_students
-FROM college_data c
-JOIN departments d ON c.college_id = d.college_id
-JOIN program_data p ON d.department_id = p.department_id
-JOIN student_data s ON p.program_id = s.program_id
-GROUP BY c.college_id;
 ```
 
 ### **Design Notes:**
