@@ -9,7 +9,7 @@ This is the central transaction table for the entire `cpedsched` system. It stor
 | Column Name | Data Type | Constraints | Description |
 |---|---|---|---|
 | **reservation\_id** | INT | PRIMARY KEY, AUTO\_INCREMENT, NOT NULL | Unique identifier for the reservation |
-| **reservation\_number** | VARCHAR(45) | UNIQUE, NOT NULL | A unique, human-readable code based on the creation date (e.g., "251107-0001") |
+| **reservation\_number** | VARCHAR(45) | UNIQUE, NULL | A unique, human-readable code based on the creation date (e.g., "251107-0001") |
 | **student\_id** | INT | FOREIGN KEY, NOT NULL | ID of the student making the reservation (links to `student_data`) |
 | **room\_id** | INT | FOREIGN KEY, NOT NULL | ID of the room being reserved (links to `room_data`) |
 | **course\_name** | VARCHAR(200) | NOT NULL | The full name of the course for which the reservation is being made |
