@@ -1,7 +1,3 @@
-Here is the documentation for the `room_keys` table based on your provided images and the established format.
-
------
-
 ## **room\_keys Table**
 
 ### **Purpose:**
