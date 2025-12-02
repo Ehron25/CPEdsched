@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPEDSched Register</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. General Reset & Font --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- 2. Header (Maroon Bar) --- */
+        .top-bar {
+            background-color: #801313; /* Deep Maroon */
+            height: 60px; /* Reverted to original height */
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px; /* Adjusted gap for smaller logo */
+        }
+
+        .logo-circle {
+            width: 45px; /* Resized to fit 60px navbar */
+            height: 45px; /* Resized to fit 60px navbar */
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #fff;
+            overflow: hidden; 
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .site-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        /* --- 3. Main Background --- */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+            background: 
+                linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)),
+                url('assets/PUPBG.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* --- 4. Card Styling --- */
+        .card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #aaa;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+        }
+
+        .register-card {
+            max-width: 900px;
+        }
+
+        .card h2 {
+            margin-bottom: 30px;
+            font-weight: 400;
+            font-size: 1.8rem;
+            color: #000;
+        }
+
+        /* --- 5. Inputs & Selects --- */
+        /* Applied same style to 'select' to match inputs */
+        .card input, 
+        .card select {
+            width: 100%;
+            padding: 14px 25px;
+            margin-bottom: 20px;
+            border: 1px solid #555;
+            border-radius: 50px; /* Full Pill Shape */
+            font-size: 1rem;
+            outline: none;
+            color: #333;
+            background-color: white; /* Ensure background is white */
+            appearance: none; /* Removes default arrow on some browsers for custom styling */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            /* Re-adding a simple arrow icon using SVG background for Selects */
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 16px;
+        }
+
+        /* Remove arrow from standard inputs */
+        .card input {
+            background-image: none;
+        }
+
+        .card input::placeholder {
+            color: #777;
+        }
+        
+        /* Style for valid option selection */
+        .card select:invalid {
+            color: #777; /* Placeholder color */
+        }
+
+        /* --- 6. Buttons --- */
+        .btn {
+            padding: 12px 40px;
+            min-width: 150px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #801313;
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #5e0e0e;
+        }
+
+        /* --- 7. Register Layout --- */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 40px;
+            margin-bottom: 20px;
+        }
+
+        .button-group-center {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        /* --- 8. SUCCESS MODAL STYLES --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 60px 80px;
+            border-radius: 50px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .modal-content h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: #000;
+        }
+
+        .modal-content .btn {
+            padding: 12px 60px;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .button-group-center {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .modal-content {
+                padding: 40px 20px;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-container">
+            <div class="logo-circle">
+                <!-- Updated Logo Link and Size -->
+                <img src="assets/PUPLogo.png" alt="Logo" class="logo-img">
+            </div>
+            <span class="site-title">CPEDSched</span>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="card register-card">
+            <h2>Welcome</h2>
+            
+            <form id="registerForm">
+                <div class="form-grid">
+                    <div class="column">
+                        <input type="text" placeholder="First Name" required>
+                        <input type="text" placeholder="Middle Name">
+                        <input type="text" placeholder="Last Name" required>
+                        <input type="text" placeholder="Student Number" required>
+                        
+                        <!-- REPLACED TEXT INPUT WITH DROPDOWN -->
+                        <select id="collegeSelect" required onchange="updatePrograms()">
+                            <option value="" disabled selected>Select College</option>
+                            <option value="CE">College of Engineering (CE)</option>
+                            <option value="CADBE">College of Architecture, Design and the Built Environment</option>
+                        </select>
+
+                        <!-- REPLACED TEXT INPUT WITH DROPDOWN (Dynamic) -->
+                        <select id="programSelect" required disabled>
+                            <option value="" disabled selected>Select Program</option>
+                        </select>
+                    </div>
+
+                    <div class="column">
+                        <input type="text" placeholder="Certificate of Registration" onfocus="(this.type='file')" onblur="(this.type='text')">
+                        <input type="email" placeholder="Webmail" required>
+                        <input type="tel" placeholder="Contact Number" required>
+                        <!-- Added IDs to password fields for verification -->
+                        <input type="password" id="password" placeholder="Password" required>
+                        <input type="password" id="confirmPassword" placeholder="Repeat Password" required>
+                    </div>
+                </div>
+
+                <div class="button-group-center">
+                    <button type="submit" class="btn">Sign Up</button>
+                    <a href="login.html" class="btn">Log in</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Registration Successful!</h2>
+            <button class="btn" onclick="window.location.href='login.html'">Log in</button>
+        </div>
+    </div>
+
+    <!-- SCRIPT FOR LOGIC -->
+    <script>
+        // 1. Data for Colleges and their Programs
+        const programsData = {
+            "CE": [
+                "Bachelor of Science in Civil Engineering (BSCE)",
+                "Bachelor of Science in Computer Engineering (BSCpE)",
+                "Bachelor of Science in Electrical Engineering (BSEE)",
+                "Bachelor of Science in Electronics Engineering (BSECE)",
+                "Bachelor of Science in Industrial Engineering (BSIE)",
+                "Bachelor of Science in Mechanical Engineering (BSME)",
+                "Bachelor of Science in Railway Engineering (BSRE)"
+            ],
+            "CADBE": [
+                "Bachelor of Science in Architecture (BS-ARCH)",
+                "Bachelor of Science in Interior Design (BSID)",
+                "Bachelor of Science in Environmental Planning (BSEP)"
+            ]
+        };
+
+        // 2. Function to update the Program Dropdown
+        function updatePrograms() {
+            const collegeSelect = document.getElementById("collegeSelect");
+            const programSelect = document.getElementById("programSelect");
+            const selectedCollege = collegeSelect.value;
+
+            // Clear current options
+            programSelect.innerHTML = '<option value="" disabled selected>Select Program</option>';
+
+            if (selectedCollege && programsData[selectedCollege]) {
+                // Enable the dropdown
+                programSelect.disabled = false;
+
+                // Add new options
+                programsData[selectedCollege].forEach(function(program) {
+                    const option = document.createElement("option");
+                    option.value = program;
+                    option.text = program;
+                    programSelect.appendChild(option);
+                });
+            } else {
+                // Disable if no valid college selected
+                programSelect.disabled = true;
+            }
+        }
+
+        // 3. Form Submission Logic
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Password Verification Logic
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return; // Stop the function here, don't show success modal
+            }
+
+            // Show the modal if passwords match
+            document.getElementById('successModal').style.display = 'flex';
+        });
+    </script>
+
+</body>
+</html>

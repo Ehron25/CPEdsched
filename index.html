@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPEDSched Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- General Reset --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* --- Header Section --- */
+        .top-bar {
+            background-color: #801313; /* Deep Maroon */
+            height: 60px; /* Standard height */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        /* Logo Area */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-circle {
+            width: 45px; /* Fits in 60px navbar */
+            height: 45px; /* Fits in 60px navbar */
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #fff;
+            overflow: hidden;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .site-title {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 400;
+        }
+
+        /* Navigation Area */
+        .nav-section {
+            display: flex;
+            align-items: center;
+            gap: 30px; 
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: opacity 0.3s;
+        }
+
+        .nav-link:hover {
+            opacity: 0.8;
+        }
+
+        /* --- User Profile & Dropdown Area --- */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .username {
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+
+        /* --- Dropdown Menu Styles --- */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            background-color: white;
+            min-width: 150px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            z-index: 200;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #eee;
+            transition: background 0.2s;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* --- Main Content --- */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: 
+                linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)),
+                url('assets/PUPBG.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* --- Big Central Button --- */
+        .big-btn-container {
+            text-align: center;
+        }
+
+        .btn-request {
+            background-color: #801313;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 400;
+            padding: 20px 60px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-request:hover {
+            background-color: #5e0e0e;
+            transform: scale(1.05);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .top-bar {
+                padding: 0 15px;
+            }
+            .nav-link {
+                display: none;
+            }
+            .site-title {
+                font-size: 1rem;
+            }
+            .username {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="top-bar">
+        <div class="logo-container">
+            <div class="logo-circle">
+                <!-- LOGO UPDATED -->
+                <img src="assets/PUPLogo.png" alt="Logo" class="logo-img">
+            </div>
+            <span class="site-title">CPEDSched</span>
+        </div>
+
+        <nav class="nav-section">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#" class="nav-link">FAQs</a>
+            
+            <div class="user-profile" onclick="toggleDropdown()">
+                <span class="username">User</span>
+                
+                <svg class="profile-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.98C6.03 13.99 10 12.9 12 12.9C13.99 12.9 17.97 13.99 18 15.98C16.71 17.92 14.5 19.2 12 19.2Z"/>
+                </svg>
+
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="#">Profile</a>
+                    <a href="#">Bookings</a>
+                    <a href="#">Schedule</a>
+                    <a href="login.html" style="color: #801313;">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div class="big-btn-container">
+            <button class="btn-request" onclick="alert('Room Request Clicked!')">Request A Room</button>
+        </div>
+    </main>
+
+    <script>
+        function toggleDropdown() {
+            var dropdown = document.getElementById("userDropdown");
+            dropdown.classList.toggle("show");
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.closest('.user-profile')) {
+                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
