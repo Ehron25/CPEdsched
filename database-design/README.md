@@ -51,6 +51,7 @@ database-design/
 └── database-simplified/
     ├── database-erd/
     │   └── cpedsched_2.0.png
+    │   └── cpedsched_2.1.png
     ├── database-model/
     │   └── cpedsched_2.0.mwb
     └── table-information/
@@ -81,7 +82,7 @@ The original, comprehensive database schema with full academic structure support
 A streamlined version (v2.0) focusing on core reservation functionality:
 
 - **Model**: `cpedsched_2.0.mwb` 
-- **ER Diagram**: `cpedsched_2.0.png` for quick visual reference
+- **ER Diagram**: `cpedsched_2.1.png` for quick visual reference
 - **Features**: Simplified user profiles, streamlined reservation process, essential equipment and key management
 
 **To view the models:**
