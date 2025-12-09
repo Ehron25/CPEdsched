@@ -436,6 +436,6 @@ Potential additions maintaining the detailed approach:
 
 **Version**: 1.x (Latest: v1.4 - cpedsched_1.4.mwb)  
 **Database Name**: cpedsched  
-**Last Updated**: December 2024  
+**Last Updated**: December 2025 
 **Maintained by**: Development Team  
 **For simplified version**: See `../database-simplified/README.md`
