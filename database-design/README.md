@@ -201,5 +201,5 @@ The database implements a normalized relational structure with:
 
 **Branch:** database-design  
 **Database Name:** cpedsched  
-**Last Updated:** December 2024  
+**Last Updated:** December 2025
 **Maintained by:** Development Team
