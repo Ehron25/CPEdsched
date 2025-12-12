@@ -54,7 +54,7 @@ The `updated_at` column automatically records the latest modification time, enab
 
 ---
 
-## **Relationships (Based on MVP ERD)**
+## **Relationships**
 
 ### **1. Belongs to Room (M:1)**
 Each key is linked to exactly one room.
@@ -150,18 +150,3 @@ pgsql
 Copy code
 
 ---
-
-## **SQL Representation**
-
-```sql
-CREATE TABLE room_keys (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    key_number VARCHAR(50) UNIQUE NOT NULL,
-    room_id INT NOT NULL,
-    status ENUM('Available', 'Issued', 'Missing', 'Damaged') DEFAULT 'Available',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (room_id) REFERENCES rooms(id)
-        ON DELETE RESTRICT
-        ON UPDATE CASCADE
-);
