@@ -60,7 +60,7 @@ Each room entry includes structural information, capacity, descriptive details, 
 
 ---
 
-## **Relationships (Based on MVP ERD)**
+## **Relationships**
 
 ### **1. Has Reservations (1:M)**
 A room can have many reservations.
