@@ -36,7 +36,7 @@ It acts as the primary user directory and supports identity verification for res
 
 ---
 
-## **Relationships (Based on MVP ERD)**
+## **Relationships**
 
 | Related Table | Relationship Type | Description |
 |--------------|------------------|-------------|
