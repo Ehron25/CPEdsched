@@ -22,7 +22,7 @@ The table is intentionally simple based on the MVP ERD to support basic reservat
 
 ## **Key Features**
 
-### **Minimal MVP Design (Based on ERD)**
+### **Minimal MVP Design**
 This structure directly reflects the MVP ERD:
 - No category system
 - No updated_at field
