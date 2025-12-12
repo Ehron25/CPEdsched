@@ -1,4 +1,4 @@
-# room_keys Table
+# room_key Table
 
 ## Purpose
 The `room_keys` table manages the complete inventory of all physical keys used within the CPEDSCHED system.  
