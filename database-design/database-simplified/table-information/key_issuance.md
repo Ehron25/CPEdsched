@@ -83,4 +83,3 @@ status: issued
 - **Real‑Time Status:**  
   The `status` column provides immediate visibility into whether a key is currently out or has been returned.
 
----
