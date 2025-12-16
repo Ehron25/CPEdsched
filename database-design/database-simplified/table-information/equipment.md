@@ -82,4 +82,3 @@ status: inactive
 - **User Interface:**  
   Only `active` equipment with `available_quantity` > 0 should be shown as reservable.
 
----
