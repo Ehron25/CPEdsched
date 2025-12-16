@@ -66,4 +66,3 @@ end_date: 2025-12-15
 - **Flexibility:**  
   Supports blocking a single day or a range of days.
 
----
