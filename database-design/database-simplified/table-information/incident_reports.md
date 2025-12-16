@@ -71,4 +71,3 @@ equipment_id: 423e4567-e89b-12d3-a456-426614174000
 - **Administrator Access:**  
   `admin_notes` allows administrators to add internal comments without altering the original report.
 
----
