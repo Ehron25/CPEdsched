@@ -7,7 +7,7 @@ Stores dates that are blocked for room reservations, such as holidays, maintenan
 
 ### **Table Structure:**
 
-| Column Name    | Data Type                | Constraints591                     | Description                                                                    |
+| Column Name    | Data Type                | Constraints                     | Description                                                                    |
 |----------------|--------------------------|------------------------------------|--------------------------------------------------------------------------------|
 | **id**         | UUID                     | PRIMARY KEY, NOT NULL, DEFAULT uuid_generate_v4() | Unique identifier for each blocked date record                                 |
 | **reason**     | TEXT                     | NOT NULL                           | Explanation for why the date(s) are blocked                                    |
