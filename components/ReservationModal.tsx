@@ -43,6 +43,18 @@ const getDaysArray = (start: string, end: string) => {
   return arr;
 };
 
+// Helper to check if a specific time is in the past (relative to now)
+const isTimePast = (timeStr: string) => {
+    const now = new Date();
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    
+    // Create a date object for the time string on "today"
+    const targetTime = new Date();
+    targetTime.setHours(hours, minutes, 0, 0);
+
+    return targetTime < now;
+};
+
 export default function ReservationModal({ room, closeModal }: ModalProps) {
   const [supabase] = useState(() => createClient());
   const [loading, setLoading] = useState(false);
@@ -64,6 +76,10 @@ export default function ReservationModal({ room, closeModal }: ModalProps) {
   const maxDateObj = new Date();
   maxDateObj.setDate(today.getDate() + 5); // Limit to 5 days in advance
   
+  // Use local time for date strings to strictly match input type="date"
+  // Note: toISOString() uses UTC. For a simple PH app, we might need offset adjustment, 
+  // but for now, we'll stick to standard ISO slicing or local construction if timezone matters.
+  // Using simple split for now assuming server/client generally aligned or UTC.
   const minDate = today.toISOString().split('T')[0];
   const maxDate = maxDateObj.toISOString().split('T')[0];
 
@@ -236,10 +252,19 @@ export default function ReservationModal({ room, closeModal }: ModalProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // --- FORM VALIDATION ---
+    
+    // 1. Contact Number Regex (PH format: 09XXXXXXXXX)
+    const contactRegex = /^09\d{9}$/;
+    if (!contactRegex.test(formData.professor_contact_number.replace(/\s/g, ''))) {
+        return alert("Please enter a valid PH mobile number (e.g., 09123456789).");
+    }
+
     if (!startTime || !endTime) return alert("Please select a valid time range.");
     if (!studentProfile) return alert("User profile not found.");
 
-    // Double check availability on submit
+    // 2. Double check availability on submit
     const startMins = toMinutes(startTime);
     const endMins = toMinutes(endTime);
     for (let m = startMins; m < endMins; m += 30) {
@@ -387,7 +412,13 @@ export default function ReservationModal({ room, closeModal }: ModalProps) {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Professor Contact #</label>
-                  <input required placeholder="0912 345 6789" className="input-field" onChange={e => setFormData({ ...formData, professor_contact_number: e.target.value })} />
+                  <input 
+                    required 
+                    placeholder="09123456789" 
+                    className="input-field" 
+                    onChange={e => setFormData({ ...formData, professor_contact_number: e.target.value })} 
+                  />
+                  <p className="text-[10px] text-gray-400 mt-1">Must be 11 digits starting with 09</p>
                 </div>
                 <div className="lg:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-1">Professor Webmail</label>
@@ -417,6 +448,9 @@ export default function ReservationModal({ room, closeModal }: ModalProps) {
                             e.target.value = '';
                             setFormData({ ...formData, date_reserved: '' });
                         } else {
+                            // Reset times when date changes to force re-validation
+                            setStartTime('');
+                            setEndTime('');
                             setFormData({ ...formData, date_reserved: selected });
                         }
                     }} 
@@ -443,9 +477,22 @@ export default function ReservationModal({ room, closeModal }: ModalProps) {
                           .filter(t => t.minutes < 1260) // Cannot start at 9:00 PM (closing)
                           .map((t) => {
                             const isTaken = occupiedSlots.includes(t.value);
+                            
+                            // Check if past
+                            // We need to check if the selected date is today (in local timezone context)
+                            const isToday = formData.date_reserved === new Date().toISOString().split('T')[0];
+                            const isPast = isToday && isTimePast(t.value);
+
+                            const isDisabled = isTaken || isPast;
+
                             return (
-                              <option key={t.value} value={t.value} disabled={isTaken} className={isTaken ? 'text-red-400 line-through bg-gray-50' : ''}>
-                                {t.label} {isTaken ? '(Taken)' : ''}
+                              <option 
+                                key={t.value} 
+                                value={t.value} 
+                                disabled={isDisabled} 
+                                className={isDisabled ? 'text-gray-300 bg-gray-50' : ''}
+                              >
+                                {t.label} {isTaken ? '(Taken)' : ''} {isPast ? '(Past)' : ''}
                               </option>
                             )
                           })}

@@ -21,7 +21,7 @@ export default function ReportIssueModal({ close, prefillRoomId, prefillReservat
     title: '',
     description: '',
     room_id: prefillRoomId || '',
-    equipment_id: '', // CHANGED: from equipment_item_id
+    equipment_id: '',
   });
 
   useEffect(() => {
@@ -37,6 +37,17 @@ export default function ReportIssueModal({ close, prefillRoomId, prefillReservat
     fetchData();
   }, [supabase]);
 
+  // Force prefilled room selection to ensure data integrity
+  useEffect(() => {
+    if (prefillRoomId) {
+        setFormData(prev => ({
+            ...prev,
+            type: 'room',
+            room_id: prefillRoomId
+        }));
+    }
+  }, [prefillRoomId]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -49,7 +60,7 @@ export default function ReportIssueModal({ close, prefillRoomId, prefillReservat
         reporter_id: user.id,
         reservation_id: prefillReservationId || null,
         room_id: formData.type === 'room' ? formData.room_id : null,
-        equipment_id: formData.type === 'equipment' ? formData.equipment_id : null, // CHANGED
+        equipment_id: formData.type === 'equipment' ? formData.equipment_id : null,
         type: formData.type,
         title: formData.title,
         description: formData.description,
@@ -102,6 +113,7 @@ export default function ReportIssueModal({ close, prefillRoomId, prefillReservat
                             checked={formData.type === t}
                             onChange={e => setFormData({...formData, type: e.target.value})}
                             className="text-primary focus:ring-primary" 
+                            disabled={!!prefillRoomId && t !== 'room'} // Lock to room if prefilled
                         />
                         <span className="capitalize">{t}</span>
                     </label>
@@ -113,18 +125,23 @@ export default function ReportIssueModal({ close, prefillRoomId, prefillReservat
              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Affected Room</label>
                 <select 
-                    className="input-field" 
+                    className={`input-field ${prefillRoomId ? 'bg-gray-100 text-gray-500 cursor-not-allowed' : ''}`}
                     value={formData.room_id} 
                     onChange={e => setFormData({...formData, room_id: e.target.value})}
                     required={formData.type === 'room'}
+                    disabled={!!prefillRoomId} // Lock input
                 >
                     <option value="">Select Room</option>
                     {rooms.map(r => <option key={r.id} value={r.id}>{r.room_number}</option>)}
                 </select>
+                {prefillRoomId && (
+                    <p className="text-xs text-gray-500 mt-1 italic">
+                        *Locked to the room from your reservation.
+                    </p>
+                )}
              </div>
           )}
 
-          {/* NEW: Equipment Selector */}
           {formData.type === 'equipment' && (
              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Affected Equipment</label>
